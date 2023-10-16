@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# Script for starting and stopping the Hello_RV1126_Linux daemon
+
+# Set the name of the daemon
+NAME=Hello_RV1126_Linux
+
+# Set the path to the daemon executable
+DAEMON=/usr/bin/$NAME
+
+# Set the path to the PID file
+PID_FILE="/var/run/$NAME.pid"
+
+# Check if the /etc/default/$NAME file exists and is readable
+if [ -r /etc/default/$NAME ]
+then
+ # If it exists, source it
+ . /etc/default/$NAME
+fi
+
+# Define the start() function
+start() {
+ # Print a message indicating that the daemon is starting
+ echo -e "Starting $NAME: "
+
+ # Start the daemon
+ $DAEMON &
+
+ # Print a message indicating that the daemon has started
+ echo "OK"
+}
+
+# Define the stop() function
+stop() {
+ # Print a message indicating that the daemon is stopping
+ echo -e "Stopping $NAME: "
+
+ # Stop the daemon
+ killall $NAME
+
+ # Print a message indicating that the daemon has stopped
+ echo "OK"
+}
+
+# Define the restart() function
+restart() {
+ # Stop the daemon
+ stop
+
+ # Start the daemon
+ start
+}
+
+# Process the command line argument
+case "$1" in
+ start)
+   # Start the daemon
+   start
+   ;;
+ stop)
+   # Stop the daemon
+   stop
+   ;;
+ restart|reload)
+   # Restart the daemon
+   restart
+   ;;
+ *)
+   # Print the usage message
+   echo "Usage: $0 {start|stop|restart}"
+   exit 1
+esac
+
+# Exit with the exit status of the last command
+exit $?

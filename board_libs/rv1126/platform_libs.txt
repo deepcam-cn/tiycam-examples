@@ -1,0 +1,6 @@
+set(BOARD_LIBRARY
+	librknn_api.so
+    librga.so
+    libeasymedia.so
+	-Wl,-Bdynamic -Wl,--unresolved-symbols=ignore-in-shared-libs
+)

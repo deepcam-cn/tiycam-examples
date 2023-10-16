@@ -1,0 +1,9 @@
+Package: Hello_RV1126_Linux
+Version: 1.0.0
+Depends: 
+Architecture: arm
+Description: Hello world
+Maintainer: Jovision
+Name: Hello
+TFLOPS: 1
+
